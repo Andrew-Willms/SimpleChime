@@ -7,81 +7,80 @@ namespace SimpleChime;
 
 public partial class ChimeForm : Form {
 
-	private decimal TimerPeriod = 45;
+	private TimeSpan TimerPeriod = TimeSpan.FromMinutes(45);
+
+	private readonly SimpleTimer Timer = new();
+
+	private bool TimerIsPaused;
+
+
 
 	public ChimeForm() {
+
 		InitializeComponent();
 
-		TimerPeriodInput.Value = 45;
+		TimerPeriodInput.Value = TimerPeriod.Minutes;
 
-		Timer MyTimer = new();
-		MyTimer.Interval = (45 * 60 * 1000); // 45 mins
-		MyTimer.Tick += new(TimerRing);
-		MyTimer.Start();
-	}
+		Timer.Start(TimerPeriod);
+		Timer.OnRing += OnTimerRing;
 
-	private void TimerPeriodInput_ValueChanged(object sender, EventArgs e) {
-
-		decimal newTimerPeriod = TimerPeriodInput.Value;
-
-		decimal currentTimerValue = 
-
-	}
-
-	private void ResetTime() {
-
-		Timer timer = new();
-		timer.Interval = (45 * 60 * 1000); // 45 mins
-		timer.Tick += new(TimerRing);
-		timer.Start();
-
-		timer.
-
-	}
-
-	private void TimerRing(object sender, EventArgs e) {
-
+		Timer labelUpdateTier = new();
+		labelUpdateTier.Tick += UpdateRemainingTimeLabel;
+		labelUpdateTier.Interval = 190;
+		labelUpdateTier.Start();
 	}
 
 
 
-}
+	private void TimerPeriodInputChanged(object? sender, EventArgs e) {
 
-public class TimerRapper {
-
-	public bool IsRunning { get; private set; } = false;
-
-	public TimeSpan? Duration { get; private set; }
-
-	public decimal TimeElapsed { get; private set; } = 0;
-
-	public decimal TimeLeft { get; private set; } = 0;
-
-
-
-	private Timer InternalTimer = new();
-
-	private DateTime? TimeWhenStarted = null;
-
-	private Action Callback;
-
-
-
-	public TimerRapper() {
+		TimerPeriod = TimeSpan.FromMinutes((double)TimerPeriodInput.Value);
 
 	}
 
-	public void SetTimer(TimeSpan duration, Action onRing) {
+	private void ToggleTimerPaused(object? sender, EventArgs e) {
 
-		Duration = duration;
-		TimeWhenStarted = DateTime.Now;
+		if (TimerIsPaused) {
 
+			TimerIsPaused = false;
+			PauseResumeButton.Text = @"Pause Timer";
+			Timer.Resume();
+			return;
+		}
+
+		TimerIsPaused = true;
+		PauseResumeButton.Text = @"Resume Timer";
+		Timer.Pause();
 	}
 
-	public void TimerRings() {
+	private void RestartTimer(object? sender, EventArgs e) {
 
-
-
+		Timer.Stop();
+		Timer.Start(TimerPeriod);
 	}
 
+	private void AddTime(object? sender, EventArgs e) {
+
+		Timer.AddTime(TimeSpan.FromMinutes(10));
+	}
+
+	private void RemoveTime(object? sender, EventArgs e) {
+
+		Timer.RemoveTime(TimeSpan.FromMinutes(10));
+	}
+
+	private static void OnTimerRing(object? sender, EventArgs e) {
+
+		System.Media.SoundPlayer player = new("meow.mp3");
+		player.Play();
+	}
+
+	private void UpdateRemainingTimeLabel(object? sender, EventArgs e) {
+
+		TimeToRingLabel.Text = $@"{Timer.TimeRemaining:\hh\:mm\:ss} remaining";
+	}
+
+	private void TimerPeriodLabel_Click(object sender, EventArgs e) {
+
+	}
 }
