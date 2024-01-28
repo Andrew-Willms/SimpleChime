@@ -57,6 +57,8 @@ public partial class ChimeForm : Form {
 
 		Timer.Stop();
 		Timer.Start(TimerPeriod);
+		TimerIsPaused = false;
+		PauseResumeButton.Text = @"Pause Timer";
 	}
 
 	private void AddTime(object? sender, EventArgs e) {
