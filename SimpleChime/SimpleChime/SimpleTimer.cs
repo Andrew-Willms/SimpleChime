@@ -152,6 +152,7 @@ public class SimpleTimer {
 	private void OnTimerRings(object? sender, EventArgs e) {
 
 		State = Complete;
+		InternalTimer.Stop();
 
 		OnRing?.Invoke(this, new TimerEventArgs {
 			Duration = Duration,
