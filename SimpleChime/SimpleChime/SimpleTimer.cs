@@ -181,6 +181,10 @@ public class SimpleTimer {
 			return false;
 		}
 
+		if (timeToRemove.Duration() > TimeRemaining) {
+			return false;
+		}
+
 		Duration -= timeToRemove;
 
 		InternalTimer.Stop();
