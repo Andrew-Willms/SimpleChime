@@ -7,7 +7,7 @@ namespace SimpleChime;
 
 public partial class ChimeForm : Form {
 
-	private TimeSpan TimerPeriod = TimeSpan.FromMinutes(45);
+	private TimeSpan TimerPeriod = TimeSpan.FromMinutes(5);
 
 	private readonly SimpleTimer Timer = new();
 
@@ -77,10 +77,18 @@ public partial class ChimeForm : Form {
 
 	private void UpdateRemainingTimeLabel(object? sender, EventArgs e) {
 
-		TimeToRingLabel.Text = $@"{Timer.TimeRemaining:\hh\:mm\:ss} remaining";
+		string formatString = Timer.TimeRemaining switch {
+			{ Days : > 1 } => "d' days 'h':'mm':'ss",
+			{ Days : > 0 } => "d' day 'h':'mm':'ss",
+			{ Hours : > 0 } => "h':'mm':'ss",
+			_ => "m':'ss",
+		};
+
+		TimeToRingLabel.Text = $@"{Timer.TimeRemaining.ToString(formatString)} remaining";
 	}
 
 	private void TimerPeriodLabel_Click(object sender, EventArgs e) {
 
 	}
+
 }
