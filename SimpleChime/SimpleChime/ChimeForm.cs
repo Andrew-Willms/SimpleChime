@@ -7,7 +7,10 @@ namespace SimpleChime;
 
 public partial class ChimeForm : Form {
 
-	private TimeSpan TimerPeriod = TimeSpan.FromMinutes(5);
+	private TimeSpan TimeToAdd = TimeSpan.FromMinutes(5);
+	private TimeSpan TimeToRemove = TimeSpan.FromMinutes(5);
+
+	private TimeSpan TimerPeriod = TimeSpan.FromMinutes(45);
 
 	private readonly SimpleTimer Timer = new();
 
@@ -25,8 +28,8 @@ public partial class ChimeForm : Form {
 		Timer.OnRing += OnTimerRing;
 
 		Timer labelUpdateTier = new();
-		labelUpdateTier.Tick += UpdateRemainingTimeLabel;
-		labelUpdateTier.Interval = 190;
+		labelUpdateTier.Tick += UpdateRemainingTimeLabelAndRemoveTimeButton;
+		labelUpdateTier.Interval = 110;
 		labelUpdateTier.Start();
 	}
 
@@ -59,16 +62,19 @@ public partial class ChimeForm : Form {
 		Timer.Start(TimerPeriod);
 		TimerIsPaused = false;
 		PauseResumeButton.Text = @"Pause Timer";
+		UpdateRemainingTimeLabelAndRemoveTimeButton(null!, null!);
 	}
 
 	private void AddTime(object? sender, EventArgs e) {
 
-		Timer.AddTime(TimeSpan.FromMinutes(10));
+		Timer.AddTime(TimeToAdd);
+		UpdateRemainingTimeLabelAndRemoveTimeButton(null!, null!);
 	}
 
 	private void RemoveTime(object? sender, EventArgs e) {
 
-		Timer.RemoveTime(TimeSpan.FromMinutes(10));
+		Timer.RemoveTime(TimeToRemove);
+		UpdateRemainingTimeLabelAndRemoveTimeButton(null!, null!);
 	}
 
 	private static void OnTimerRing(object? sender, EventArgs e) {
@@ -77,7 +83,7 @@ public partial class ChimeForm : Form {
 		player.Play();
 	}
 
-	private void UpdateRemainingTimeLabel(object? sender, EventArgs e) {
+	private void UpdateRemainingTimeLabelAndRemoveTimeButton(object? sender, EventArgs e) {
 
 		string formatString = Timer.TimeRemaining switch {
 			{ Days : > 1 } => "d' days 'h':'mm':'ss",
@@ -87,6 +93,8 @@ public partial class ChimeForm : Form {
 		};
 
 		TimeToRingLabel.Text = $@"{Timer.TimeRemaining.ToString(formatString)} remaining";
+
+		RemoveTimeButton.Enabled = Timer.TimeRemaining > TimeToRemove;
 	}
 
 	private void TimerPeriodLabel_Click(object sender, EventArgs e) {
