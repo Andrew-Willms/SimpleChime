@@ -45,27 +45,29 @@ partial class ChimeForm {
 		// 
 		// TimerPeriodInput
 		// 
-		TimerPeriodInput.Location = new Point(94, 63);
+		TimerPeriodInput.Location = new Point(40, 40);
 		TimerPeriodInput.Name = "TimerPeriodInput";
-		TimerPeriodInput.Size = new Size(120, 23);
+		TimerPeriodInput.Size = new Size(53, 23);
 		TimerPeriodInput.TabIndex = 0;
+		TimerPeriodInput.TextAlign = HorizontalAlignment.Right;
 		TimerPeriodInput.ValueChanged += TimerPeriodInputChanged;
 		TimerPeriodInput.KeyPress += TimerPeriodInput_KeyPressed;
 		// 
 		// TimerPeriodLabel
 		// 
 		TimerPeriodLabel.AutoSize = true;
-		TimerPeriodLabel.Location = new Point(220, 65);
+		TimerPeriodLabel.Location = new Point(96, 42);
+		TimerPeriodLabel.Margin = new Padding(0, 0, 3, 0);
 		TimerPeriodLabel.Name = "TimerPeriodLabel";
-		TimerPeriodLabel.Size = new Size(130, 15);
+		TimerPeriodLabel.Size = new Size(127, 15);
 		TimerPeriodLabel.TabIndex = 1;
-		TimerPeriodLabel.Text = "minutes between rings.";
+		TimerPeriodLabel.Text = "minutes between rings";
 		TimerPeriodLabel.Click += TimerPeriodLabel_Click;
 		// 
 		// TimeToRingLabel
 		// 
 		TimeToRingLabel.AutoSize = true;
-		TimeToRingLabel.Location = new Point(94, 118);
+		TimeToRingLabel.Location = new Point(40, 84);
 		TimeToRingLabel.Name = "TimeToRingLabel";
 		TimeToRingLabel.Size = new Size(100, 15);
 		TimeToRingLabel.TabIndex = 2;
@@ -73,7 +75,7 @@ partial class ChimeForm {
 		// 
 		// ResetTimerButton
 		// 
-		ResetTimerButton.Location = new Point(220, 114);
+		ResetTimerButton.Location = new Point(190, 80);
 		ResetTimerButton.Name = "ResetTimerButton";
 		ResetTimerButton.Size = new Size(93, 23);
 		ResetTimerButton.TabIndex = 3;
@@ -83,7 +85,7 @@ partial class ChimeForm {
 		// 
 		// RemoveTimeButton
 		// 
-		RemoveTimeButton.Location = new Point(220, 168);
+		RemoveTimeButton.Location = new Point(190, 120);
 		RemoveTimeButton.Name = "RemoveTimeButton";
 		RemoveTimeButton.Size = new Size(75, 23);
 		RemoveTimeButton.TabIndex = 4;
@@ -93,7 +95,7 @@ partial class ChimeForm {
 		// 
 		// AddTimeButton
 		// 
-		AddTimeButton.Location = new Point(301, 168);
+		AddTimeButton.Location = new Point(271, 120);
 		AddTimeButton.Name = "AddTimeButton";
 		AddTimeButton.Size = new Size(75, 23);
 		AddTimeButton.TabIndex = 5;
@@ -103,7 +105,7 @@ partial class ChimeForm {
 		// 
 		// PauseResumeButton
 		// 
-		PauseResumeButton.Location = new Point(94, 168);
+		PauseResumeButton.Location = new Point(40, 120);
 		PauseResumeButton.Name = "PauseResumeButton";
 		PauseResumeButton.Size = new Size(75, 23);
 		PauseResumeButton.TabIndex = 6;
@@ -122,7 +124,7 @@ partial class ChimeForm {
 		// 
 		AutoScaleDimensions = new SizeF(7F, 15F);
 		AutoScaleMode = AutoScaleMode.Font;
-		ClientSize = new Size(800, 450);
+		ClientSize = new Size(384, 177);
 		Controls.Add(PauseResumeButton);
 		Controls.Add(AddTimeButton);
 		Controls.Add(RemoveTimeButton);
