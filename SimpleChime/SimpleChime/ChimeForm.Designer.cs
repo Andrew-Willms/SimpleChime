@@ -132,6 +132,7 @@ partial class ChimeForm {
 		Controls.Add(TimeToRingLabel);
 		Controls.Add(TimerPeriodLabel);
 		Controls.Add(TimerPeriodInput);
+		FormBorderStyle = FormBorderStyle.FixedSingle;
 		Icon = (Icon)resources.GetObject("$this.Icon");
 		Name = "ChimeForm";
 		Text = "SimpleChime";
