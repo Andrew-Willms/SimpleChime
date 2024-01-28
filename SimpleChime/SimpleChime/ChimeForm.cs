@@ -77,10 +77,12 @@ public partial class ChimeForm : Form {
 		UpdateRemainingTimeLabelAndRemoveTimeButton(null!, null!);
 	}
 
-	private static void OnTimerRing(object? sender, EventArgs e) {
+	private void OnTimerRing(object? sender, EventArgs e) {
 
 		System.Media.SoundPlayer player = new("meow.mp3");
 		player.Play();
+
+		RestartTimer(null!, null!);
 	}
 
 	private void UpdateRemainingTimeLabelAndRemoveTimeButton(object? sender, EventArgs e) {
