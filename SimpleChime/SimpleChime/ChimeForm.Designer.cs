@@ -30,6 +30,8 @@ partial class ChimeForm {
 	///  the contents of this method with the code editor.
 	/// </summary>
 	private void InitializeComponent() {
+		components = new System.ComponentModel.Container();
+		System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChimeForm));
 		TimerPeriodInput = new NumericUpDown();
 		TimerPeriodLabel = new Label();
 		TimeToRingLabel = new Label();
@@ -37,6 +39,7 @@ partial class ChimeForm {
 		RemoveTimeButton = new Button();
 		AddTimeButton = new Button();
 		PauseResumeButton = new Button();
+		SystemTrayIcon = new NotifyIcon(components);
 		((System.ComponentModel.ISupportInitialize)TimerPeriodInput).BeginInit();
 		SuspendLayout();
 		// 
@@ -47,6 +50,7 @@ partial class ChimeForm {
 		TimerPeriodInput.Size = new Size(120, 23);
 		TimerPeriodInput.TabIndex = 0;
 		TimerPeriodInput.ValueChanged += TimerPeriodInputChanged;
+		TimerPeriodInput.KeyPress += TimerPeriodInput_KeyPressed;
 		// 
 		// TimerPeriodLabel
 		// 
@@ -107,6 +111,13 @@ partial class ChimeForm {
 		PauseResumeButton.UseVisualStyleBackColor = true;
 		PauseResumeButton.Click += ToggleTimerPaused;
 		// 
+		// SystemTrayIcon
+		// 
+		SystemTrayIcon.Icon = (Icon)resources.GetObject("SystemTrayIcon.Icon");
+		SystemTrayIcon.Text = "Simple Chime";
+		SystemTrayIcon.MouseClick += SystemTrayIcon_MouseClick;
+		SystemTrayIcon.MouseDoubleClick += SystemTrayIcon_MouseClick;
+		// 
 		// ChimeForm
 		// 
 		AutoScaleDimensions = new SizeF(7F, 15F);
@@ -119,8 +130,10 @@ partial class ChimeForm {
 		Controls.Add(TimeToRingLabel);
 		Controls.Add(TimerPeriodLabel);
 		Controls.Add(TimerPeriodInput);
+		Icon = (Icon)resources.GetObject("$this.Icon");
 		Name = "ChimeForm";
 		Text = "SimpleChime";
+		Resize += ChimeForm_Resize;
 		((System.ComponentModel.ISupportInitialize)TimerPeriodInput).EndInit();
 		ResumeLayout(false);
 		PerformLayout();
@@ -135,4 +148,5 @@ partial class ChimeForm {
 	private Button RemoveTimeButton;
 	private Button AddTimeButton;
 	private Button PauseResumeButton;
+	private NotifyIcon SystemTrayIcon;
 }

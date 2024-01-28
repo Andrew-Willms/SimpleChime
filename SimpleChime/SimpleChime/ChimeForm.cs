@@ -38,7 +38,17 @@ public partial class ChimeForm : Form {
 	private void TimerPeriodInputChanged(object? sender, EventArgs e) {
 
 		TimerPeriod = TimeSpan.FromMinutes((double)TimerPeriodInput.Value);
+	}
 
+	private void TimerPeriodInput_KeyPressed(object? sender, KeyPressEventArgs e) {
+
+		if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.') {
+			e.Handled = true;
+		}
+
+		if (e.KeyChar == '.' && TimerPeriodInput.Text.Contains('.')) {
+			e.Handled = true;
+		}
 	}
 
 	private void ToggleTimerPaused(object? sender, EventArgs e) {
@@ -79,8 +89,13 @@ public partial class ChimeForm : Form {
 
 	private void OnTimerRing(object? sender, EventArgs e) {
 
-		System.Media.SoundPlayer player = new("meow.mp3");
-		player.Play();
+		try {
+			System.Media.SoundPlayer player = new("meow.wav");
+			player.Play();
+
+		} catch {
+			// ignored
+		}
 
 		RestartTimer(null!, null!);
 	}
@@ -101,6 +116,25 @@ public partial class ChimeForm : Form {
 
 	private void TimerPeriodLabel_Click(object sender, EventArgs e) {
 
+	}
+
+
+
+	private void ChimeForm_Resize(object sender, EventArgs e) {
+
+		if (WindowState != FormWindowState.Minimized) {
+			return;
+		}
+
+		SystemTrayIcon.Visible = true;
+		ShowInTaskbar = false;
+	}
+
+	private void SystemTrayIcon_MouseClick(object sender, MouseEventArgs e) {
+
+		WindowState = FormWindowState.Normal;
+		SystemTrayIcon.Visible = false;
+		ShowInTaskbar = true;
 	}
 
 }
