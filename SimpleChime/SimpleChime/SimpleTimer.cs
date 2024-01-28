@@ -27,6 +27,9 @@ public enum TimerState {
 
 
 
+// todo look into making this thread safe (make sure each function rus in it's entirety and doesn't get interrupted)
+// todo see if I can test any of this
+
 public class SimpleTimer {
 
 	public TimeSpan Duration { get; private set; }
