@@ -83,7 +83,7 @@ partial class ChimeForm {
 		RemoveTimeButton.Name = "RemoveTimeButton";
 		RemoveTimeButton.Size = new Size(75, 23);
 		RemoveTimeButton.TabIndex = 4;
-		RemoveTimeButton.Text = "- 10 mins";
+		RemoveTimeButton.Text = "- 5 mins";
 		RemoveTimeButton.UseVisualStyleBackColor = true;
 		RemoveTimeButton.Click += RemoveTime;
 		// 
@@ -93,7 +93,7 @@ partial class ChimeForm {
 		AddTimeButton.Name = "AddTimeButton";
 		AddTimeButton.Size = new Size(75, 23);
 		AddTimeButton.TabIndex = 5;
-		AddTimeButton.Text = "+ 10 mins";
+		AddTimeButton.Text = "+ 5 mins";
 		AddTimeButton.UseVisualStyleBackColor = true;
 		AddTimeButton.Click += AddTime;
 		// 
