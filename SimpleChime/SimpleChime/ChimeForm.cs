@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Media;
 using System.Windows.Forms;
 
 namespace SimpleChime;
@@ -9,6 +11,7 @@ public partial class ChimeForm : Form {
 
 	private readonly TimeSpan TimeToAdd = TimeSpan.FromMinutes(5);
 	private readonly TimeSpan TimeToRemove = TimeSpan.FromMinutes(5);
+	private const string AlarmPath = "alarm.wav";
 
 	private TimeSpan TimerPeriod = TimeSpan.FromMinutes(45);
 
@@ -89,12 +92,15 @@ public partial class ChimeForm : Form {
 
 	private void OnTimerRing(object? sender, EventArgs e) {
 
+		SoundPlayer player = File.Exists(AlarmPath)
+			? new(AlarmPath)
+			: new(Properties.Resources.meow);
+
 		try {
-			System.Media.SoundPlayer player = new("meow.wav");
 			player.Play();
 
 		} catch {
-			// ignored
+			SystemSounds.Exclamation.Play();
 		}
 
 		RestartTimer(null!, null!);
