@@ -7,8 +7,8 @@ namespace SimpleChime;
 
 public partial class ChimeForm : Form {
 
-	private TimeSpan TimeToAdd = TimeSpan.FromMinutes(5);
-	private TimeSpan TimeToRemove = TimeSpan.FromMinutes(5);
+	private readonly TimeSpan TimeToAdd = TimeSpan.FromMinutes(5);
+	private readonly TimeSpan TimeToRemove = TimeSpan.FromMinutes(5);
 
 	private TimeSpan TimerPeriod = TimeSpan.FromMinutes(45);
 
