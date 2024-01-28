@@ -29,7 +29,8 @@ public enum TimerState {
 
 // todo look into making this thread safe (make sure each function rus in it's entirety and doesn't get interrupted)
 // todo see if I can test any of this
-
+// todo consider changing events to something else to better support async "event handlers"
+// todo look into if I should call dispose on the InternalTimer or have a Dispose() function for the class
 public class SimpleTimer {
 
 	public TimeSpan Duration { get; private set; }
