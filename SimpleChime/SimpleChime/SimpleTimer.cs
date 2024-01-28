@@ -160,12 +160,34 @@ public class SimpleTimer {
 		});
 	}
 
-	public void AddTime(TimeSpan timeToAdd) {
-		throw new NotImplementedException();
+	public bool AddTime(TimeSpan timeToAdd) {
+
+		if (State is Complete) {
+			return false;
+		}
+
+		Duration += timeToAdd;
+
+		InternalTimer.Stop();
+		InternalTimer.Interval = TimeRemaining.TotalMilliseconds;
+		InternalTimer.Elapsed += OnTimerRings;
+
+		return true;
 	}
 
-	public void RemoveTime(TimeSpan timeToRemove) {
-		throw new NotImplementedException();
+	public bool RemoveTime(TimeSpan timeToRemove) {
+
+		if (State is Complete) {
+			return false;
+		}
+
+		Duration -= timeToRemove;
+
+		InternalTimer.Stop();
+		InternalTimer.Interval = TimeRemaining.TotalMilliseconds;
+		InternalTimer.Elapsed += OnTimerRings;
+
+		return true;
 	}
 
 }
