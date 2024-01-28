@@ -74,6 +74,7 @@ public class SimpleTimer {
 		State = Running;
 		Duration = duration;
 		TimeLastStarted = DateTime.Now;
+		PreviousTimeElapsed = TimeSpan.Zero;
 
 		InternalTimer.Interval = Duration.TotalMilliseconds;
 		InternalTimer.Start();
